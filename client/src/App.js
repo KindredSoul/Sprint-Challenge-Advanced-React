@@ -1,4 +1,7 @@
 import React from "react";
+import { DataCard } from "./DataCard";
+import { DarkMode } from "./DarkMode";
+
 import "./App.css";
 
 class App extends React.Component {
@@ -10,7 +13,7 @@ class App extends React.Component {
 			fetch("http://localhost:5000/api/players")
 				.then(res => res.json())
 				.then(res => {
-					console.log(res);
+					// console.log(res);
 					this.setState({
 						wwcData: res
 					});
@@ -22,15 +25,8 @@ class App extends React.Component {
 	render() {
 		return (
 			<div>
-				{this.state.wwcData.map(data => {
-					return (
-						<div key={data.id}>
-							<h2>Name: {data.name}</h2>
-							<h3>Country: {data.country}</h3>
-							<h3>Times searhced: {data.searches}</h3>
-						</div>
-					);
-				})}
+				<DarkMode />
+				{this.state.wwcData.map(data => <DataCard key={data.id} cardData={data} />)}
 			</div>
 		);
 	}
